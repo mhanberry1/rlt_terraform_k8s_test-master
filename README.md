@@ -1,6 +1,8 @@
 # rlt_terraform_k8s_test
 This repo holds the assets needed for our Terraform, Kubernetes, And Helm coding test
 
+For deployment instructions, see below.
+
 ## Test Overview
 The purpose of this test is to demonstrate your knowledge in the following areas: 
 * GCP
@@ -11,7 +13,7 @@ The purpose of this test is to demonstrate your knowledge in the following areas
 This repo holds the application code and Dockerfile in the "application" directory. The helm chart to be used to deploy the application to the Kubernetes cluster is the "charts" directory. 
 
 ## Test Instructions
-1) [ ] Create Terraform code to deploy a Kubernetes cluster inside of GCP. 
+1) [x] Create Terraform code to deploy a Kubernetes cluster inside of GCP. 
 2) [ ] Build rlt-test application image and push GCR
 3) [ ] Deploy the helm chart included in the repo into the kubernetes cluster.  
 4) [ ] Fix any issues that may be present in the helm chart.
@@ -34,7 +36,16 @@ This repo holds the application code and Dockerfile in the "application" directo
 * We would like for this to be as close to a single command deployment as possible (terraform, and the helm deploy). 
 * We would also like for you to tackle this as you would a production ready deployment. We understand that time may not permit production like deploys in all areas, in this scenario please note what you would do different in a production environment.
 
+## Deployment Instructions
 
+### Pre-Requisites
 
-
-
+1. Download Terraform 0.12 from [here](https://www.terraform.io/downloads.html)
+2. Prepare your GCP account
+	- If you do not have an account, create it
+	- Make sure it is configured with payment information
+	- Create a project
+	- Enable The Kubernetes Engine API for this project
+	- Create a service account for the project, and create an account key for it
+	- Save the key in the project directory as account.json
+	- Give your service account Kubernetes Engine Admin and Service Account User permissions
