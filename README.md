@@ -48,4 +48,8 @@ This repo holds the application code and Dockerfile in the "application" directo
 	- Enable The Kubernetes Engine API for this project
 	- Create a service account for the project, and create an account key for it
 	- Save the key in the project directory as account.json
-	- Give your service account Kubernetes Engine Admin and Service Account User permissions
+	- Give your service account the following IAM roles:
+		- Kubernetes Engine Admin
+		- Service Account User permissions
+		- Compute Admin
+		- Storage Admin

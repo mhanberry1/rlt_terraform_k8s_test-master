@@ -4,6 +4,8 @@ provider "google" {
 	region = var.region 
 }
 
+# Create the kubernetes cluster
+
 resource "google_container_cluster" "primary" {
 	name = "${var.project}-gke-cluster"
 	location = var.region
@@ -39,4 +41,11 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 			"https://www.googleapis.com/auth/monitoring"
 		]
 	}
+}
+
+# Create the container registry
+
+resource "google_container_registry" "registry" {
+	project = var.project
+	location = "US"
 }
