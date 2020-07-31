@@ -2,3 +2,4 @@
 .*.swp
 account.json
 *.tfstate*
+.terraform
