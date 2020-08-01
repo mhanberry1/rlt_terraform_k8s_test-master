@@ -1,7 +1,33 @@
 # rlt_terraform_k8s_test
 This repo holds the assets needed for our Terraform, Kubernetes, And Helm coding test
 
-For deployment instructions, see below.
+## Deployment Instructions
+
+### Pre-Requisites
+
+1. Download Terraform 0.12 from [here](https://www.terraform.io/downloads.html)
+2. Prepare your GCP account
+	- If you do not have an account, create it
+	- Make sure it is configured with payment information
+	- Create a project
+	- Enable The Kubernetes Engine API for this project
+	- Create a service account for the project, and create an account key for it
+	- Save the key in the project directory as account.json
+	- Give your service account the following IAM roles:
+		- Kubernetes Engine Admin
+		- Service Account User permissions
+		- Compute Admin
+		- Storage Admin
+3. Install Docker as described [here](https://docs.docker.com/get-docker/)
+4. Install Cloud SDK from [here](https://cloud.google.com/sdk/docs)
+5. Configure docker to use gcloud as a credential helper using `gcloud auth configure-docker`
+6. Log in to google cloud using `gcloud auth login`
+
+### Deploy
+
+1. Build the infrastructure using `terraform apply`
+2. Navigate to `application/rlt-test` and build the docker container using `docker build -t us.gcr.io/rlt-test/rlt-test .`
+3. Upload the container to GCR using `docker push us.gcr.io/rlt-test/rlt-test`
 
 ## Test Overview
 The purpose of this test is to demonstrate your knowledge in the following areas: 
@@ -14,7 +40,7 @@ This repo holds the application code and Dockerfile in the "application" directo
 
 ## Test Instructions
 1) [x] Create Terraform code to deploy a Kubernetes cluster inside of GCP. 
-2) [ ] Build rlt-test application image and push GCR
+2) [x] Build rlt-test application image and push GCR
 3) [ ] Deploy the helm chart included in the repo into the kubernetes cluster.  
 4) [ ] Fix any issues that may be present in the helm chart.
 5) [ ] Expose the application to the outside world.  
@@ -35,21 +61,3 @@ This repo holds the application code and Dockerfile in the "application" directo
 * If you are unable to complete all tasks in this test its not a deal breaker, but please do you best. If you run out of time and are unable to finish the code, please try to write in psuedo code or written language how you would approach the issues you were unable to finish.
 * We would like for this to be as close to a single command deployment as possible (terraform, and the helm deploy). 
 * We would also like for you to tackle this as you would a production ready deployment. We understand that time may not permit production like deploys in all areas, in this scenario please note what you would do different in a production environment.
-
-## Deployment Instructions
-
-### Pre-Requisites
-
-1. Download Terraform 0.12 from [here](https://www.terraform.io/downloads.html)
-2. Prepare your GCP account
-	- If you do not have an account, create it
-	- Make sure it is configured with payment information
-	- Create a project
-	- Enable The Kubernetes Engine API for this project
-	- Create a service account for the project, and create an account key for it
-	- Save the key in the project directory as account.json
-	- Give your service account the following IAM roles:
-		- Kubernetes Engine Admin
-		- Service Account User permissions
-		- Compute Admin
-		- Storage Admin
