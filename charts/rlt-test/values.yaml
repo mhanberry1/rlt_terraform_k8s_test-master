@@ -1,12 +1,12 @@
 replicaCount: 1
 
 image:
-  repository:
-  tag:
+  repository: us.gcr.io/rlt-test/rlt-test
+  tag: latest
   pullPolicy: Always
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
 
 ingress:
@@ -16,7 +16,7 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   path: /
   hosts:
-    - chart-example.local
+    - rlttest.ga
   tls: []
 
 

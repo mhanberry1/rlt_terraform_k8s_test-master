@@ -6,10 +6,14 @@ This repo holds the assets needed for our Terraform, Kubernetes, And Helm coding
 ### Pre-Requisites
 
 1. Download Terraform 0.12 from [here](https://www.terraform.io/downloads.html)
-2. Prepare your GCP account
+2. Install Docker as described [here](https://docs.docker.com/get-docker/)
+3. Install Cloud SDK from [here](https://cloud.google.com/sdk/docs)
+4. Install helm as described [here](https://helm.sh/docs/intro/install/)
+5. Install kubctl using `gcloud components install kubectl`
+6. Prepare your GCP account
 	- If you do not have an account, create it
 	- Make sure it is configured with payment information
-	- Create a project
+	- Create a project named `rlt-test`
 	- Enable The Kubernetes Engine API for this project
 	- Create a service account for the project, and create an account key for it
 	- Save the key in the project directory as account.json
@@ -18,16 +22,21 @@ This repo holds the assets needed for our Terraform, Kubernetes, And Helm coding
 		- Service Account User permissions
 		- Compute Admin
 		- Storage Admin
-3. Install Docker as described [here](https://docs.docker.com/get-docker/)
-4. Install Cloud SDK from [here](https://cloud.google.com/sdk/docs)
-5. Configure docker to use gcloud as a credential helper using `gcloud auth configure-docker`
-6. Log in to google cloud using `gcloud auth login`
+7. Configure docker to use gcloud as a credential helper using `gcloud auth configure-docker`
+8. Log in to google cloud using `gcloud auth login`
+9. Configure the project value in gcloud using `gcloud config set project rlt-test`
+10. Get the cluster credentials usind `gcloud container clusters get-credentials rlt-test-gke-cluster --zone us-central1`
 
 ### Deploy
 
 1. Build the infrastructure using `terraform apply`
 2. Navigate to `application/rlt-test` and build the docker container using `docker build -t us.gcr.io/rlt-test/rlt-test .`
 3. Upload the container to GCR using `docker push us.gcr.io/rlt-test/rlt-test`
+4. Deploy the helm chart from the root of the repository using `helm install rlt-test charts/rlt-test/`
+
+### Use
+
+You can access the resource using the external ip found by issuing the command `kubectl get service rlt-test`
 
 ## Test Overview
 The purpose of this test is to demonstrate your knowledge in the following areas: 
@@ -41,9 +50,9 @@ This repo holds the application code and Dockerfile in the "application" directo
 ## Test Instructions
 1) [x] Create Terraform code to deploy a Kubernetes cluster inside of GCP. 
 2) [x] Build rlt-test application image and push GCR
-3) [ ] Deploy the helm chart included in the repo into the kubernetes cluster.  
-4) [ ] Fix any issues that may be present in the helm chart.
-5) [ ] Expose the application to the outside world.  
+3) [x] Deploy the helm chart included in the repo into the kubernetes cluster.  
+4) [x] Fix any issues that may be present in the helm chart.
+5) [x] Expose the application to the outside world.  
 
 **You will have 48 hours to get as much of this test done as possible. Once complete please commit your code to your one repo and send an email at codingtest@rootleveltech.com. In the email please include your first and last name, as well as a link to your git repo holding your code for this test. If you have any questions or need further clarifications please reach back out to us at codingtest@rootleveltech.com**
 
